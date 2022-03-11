@@ -1,0 +1,372 @@
+===                        *******************Spring*********************
+
+
+
+spring framework ::::::::
+This spring tutorial provides in-depth concepts of Spring Framework with simplified examples. It was developed by Rod Johnson in 2003. Spring framework makes the easy development of JavaEE application.
+
+It is helpful for beginners and experienced persons.
+
+
+
+features:
+
+spring is so popular to enables writing testable code
+dependency injection
+spring has a very good  integration frameworks like Junit and mockito
+no plumbing code
+very modular
+flexible archieture
+staying current.
+
+Spring Framework
+Spring is a lightweight framework. It can be thought of as a framework of frameworks because it provides support to various frameworks such as Struts, Hibernate, Tapestry, EJB, JSF, etc. The framework, in broader sense, can be defined as a structure where we find solution of the various technical problems.
+
+The Spring framework comprises several modules such as IOC, AOP, DAO, Context, ORM, WEB MVC etc. We will learn these modules in next page. Let's understand the IOC and Dependency Injection first.
+
+Inversion Of Control (IOC) and Dependency Injection
+These are the design patterns that are used to remove dependency from the programming code. They make the code easier to test and maintain. Let's understand this with the following code:
+
+class Employee{  
+Address address;  
+Employee(){  
+address=new Address();  
+}  
+}  
+In such case, there is dependency between the Employee and Address (tight coupling). In the Inversion of Control scenario, we do this something like this:
+
+class Employee{  
+Address address;  
+Employee(Address address){  
+this.address=address;  
+}  
+}  
+Thus, IOC makes the code loosely coupled. In such case, there is no need to modify the code if our logic is moved to new environment.
+
+In Spring framework, IOC container is responsible to inject the dependency. We provide metadata to the IOC container either by XML file or annotation.
+
+Advantage of Dependency Injection
+makes the code loosely coupled so easy to maintain
+makes the code easy to test
+Advantages of Spring Framework
+There are many advantages of Spring Framework. They are as follows:
+
+
+2) Loose Coupling
+The Spring applications are loosely coupled because of dependency injection.
+
+3) Easy to test
+The Dependency Injection makes easier to test the application. The EJB or Struts application require server to run the application but Spring framework doesn't require server.
+
+4) Lightweight
+Spring framework is lightweight because of its POJO implementation. The Spring Framework doesn't force the programmer to inherit any class or implement any interface. That is why it is said non-invasive.
+
+5) Fast Development
+The Dependency Injection feature of Spring Framework and it support to various frameworks makes the easy development of JavaEE application.
+
+6) Powerful abstraction
+It provides powerful abstraction to JavaEE specifications such as JMS, JDBC, JPA and JTA.
+
+7) Declarative support
+It provides declarative support for caching, validation, transactions and formatting.
+
+
+IoC Container
+IoC Container
+Using BeanFactory
+Using ApplicationContext
+The IoC container is responsible to instantiate, configure and assemble the objects. The IoC container gets informations from the XML file and works accordingly. The main tasks performed by IoC container are:
+
+to instantiate the application class
+to configure the object
+to assemble the dependencies between the objects
+There are two types of IoC containers. They are:
+
+BeanFactory
+ApplicationContext:
+
+        ApplicationContext context =   
+    new ClassPathXmlApplicationContext("applicationContext.xml");  
+
+dependency can be in 2 ways:
+    setters,constructors
+
+
+Autowiring in Spring
+Autowiring feature of spring framework enables you to inject the object dependency implicitly. It internally uses setter or constructor injection.
+
+Autowiring can't be used to inject primitive and string values. It works with reference only.
+
+syntax:
+    <bean id="a" class="org.sssit.A" autowire="byName"></bean>
+
+<bean id="b1" class="org.sssit.B"></bean>  
+<bean id="b2" class="org.sssit.B"></bean>  
+<bean id="a" class="org.sssit.A" autowire="byName"></bean>
+
+
+
+
+*************************************SPRING JDBC  ****************************
+Spring JDBC Template
+Understanding the need for Spring JDBC Template
+Advantage of Spring JDBC Template
+JDBC Template classes
+Example of JdbcTemplate class
+Spring JdbcTemplate is a powerful mechanism to connect to the database and execute SQL queries. It internally uses JDBC api, but eliminates a lot of problems of JDBC API.
+
+Problems of JDBC API
+The problems of JDBC API are as follows:
+
+We need to write a lot of code before and after executing the query, such as creating connection, statement, closing resultset, connection etc.
+We need to perform exception handling code on the database logic.
+We need to handle transaction.
+Repetition of all these codes from one to another database logic is a time consuming task.
+Advantage of Spring JdbcTemplate
+Spring JdbcTemplate eliminates all the above mentioned problems of JDBC API. It provides you methods to write the queries directly, so it saves a lot of work 
+  
+Prepared statement
+
+sytax:
+public T doInPreparedStatement(PreparedStatement ps)throws SQLException, DataAccessException 
+
+
+ResultSet:
+syntax:
+public T query(String sql,ResultSetExtractor<T> rse)  
+RowMapper:
+syntax:
+public T query(String sql,RowMapper<T> rm)   
+namedparameterjdbctemplate :
+example:
+insert into employee values (:id,:name,:salary)
+
+
+*******************************Spring with ORM Frameworks*******************************
+
+Spring with ORM Frameworks
+Advantage of Spring with ORM
+Spring provides API to easily integrate Spring with ORM frameworks such as Hibernate, JPA(Java Persistence API), JDO(Java Data Objects), Oracle Toplink and iBATIS.
+
+Advantage of ORM Frameworks with Spring
+There are a lot of advantage of Spring framework in respect to ORM frameworks. There are as follows:
+
+Less coding is required: By the help of Spring framework, you don't need to write extra codes before and after the actual database logic such as getting the connection, starting transaction, commiting transaction, closing connection etc.
+Easy to test: Spring's IoC approach makes it easy to test the application.
+Better exception handling: Spring framework provides its own API for exception handling with ORM framework.
+Integrated transaction management: By the help of Spring framework, we can wrap our mapping code with an explicit template wrapper class or AOP style method interceptor.
+
+Hibernate and Spring Integration
+We can simply integrate hibernate application with spring application.
+
+In hibernate framework, we provide all the database information hibernate.cfg.xml file.
+
+But if we are going to integrate the hibernate application with spring, we don't need to create the hibernate.cfg.xml file. We can provide all the information in the applicationContext.xml file.
+
+Advantage of Spring framework with hibernate
+The Spring framework provides HibernateTemplate class, so you don't need to follow so many steps like create Configuration, BuildSessionFactory, Session, beginning and committing transaction etc.
+
+So it saves a lot of code.
+
+Understanding problem without using spring.
+
+
+one example for spring using jpa,h2 console:
+   package com.example.accessingdatajpa;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
+public class Customer {
+
+  @Id
+  @GeneratedValue(strategy=GenerationType.AUTO)
+  private Long id;
+  private String firstName;
+  private String lastName;
+
+  protected Customer() {}
+
+  public Customer(String firstName, String lastName) {
+    this.firstName = firstName;
+    this.lastName = lastName;
+  }
+
+  @Override
+  public String toString() {
+    return String.format(
+        "Customer[id=%d, firstName='%s', lastName='%s']",
+        id, firstName, lastName);
+  }
+
+  public Long getId() {
+    return id;
+  }
+
+  public String getFirstName() {
+    return firstName;
+  }
+
+  public String getLastName() {
+    return lastName;
+  }
+}
+
+
+package com.example.accessingdatajpa;
+
+import java.util.List;
+
+import org.springframework.data.repository.CrudRepository;
+
+public interface CustomerRepository extends CrudRepository<Customer, Long> {
+
+  List<Customer> findByLastName(String lastName);
+
+  Customer findById(long id);
+}
+
+package com.example.accessingdatajpa;
+
+import java.util.List;
+
+import org.springframework.data.repository.CrudRepository;
+
+public interface CustomerRepository extends CrudRepository<Customer, Long> {
+
+  List<Customer> findByLastName(String lastName);
+
+  Customer findById(long id);
+}
+
+package com.example.accessingdatajpa;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class AccessingDataJpaApplication {
+
+  public static void main(String[] args) {
+    SpringApplication.run(AccessingDataJpaApplication.class, args);
+  }
+
+}
+
+package com.example.accessingdatajpa;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
+
+@SpringBootApplication
+public class AccessingDataJpaApplication {
+
+  private static final Logger log = LoggerFactory.getLogger(AccessingDataJpaApplication.class);
+
+  public static void main(String[] args) {
+    SpringApplication.run(AccessingDataJpaApplication.class);
+  }
+
+  @Bean
+  public CommandLineRunner demo(CustomerRepository repository) {
+    return (args) -> {
+      // save a few customers
+      repository.save(new Customer("Jack", "Bauer"));
+      repository.save(new Customer("Chloe", "O'Brian"));
+      repository.save(new Customer("Kim", "Bauer"));
+      repository.save(new Customer("David", "Palmer"));
+      repository.save(new Customer("Michelle", "Dessler"));
+
+      // fetch all customers
+      log.info("Customers found with findAll():");
+      log.info("-------------------------------");
+      for (Customer customer : repository.findAll()) {
+        log.info(customer.toString());
+      }
+      log.info("");
+
+      // fetch an individual customer by ID
+      Customer customer = repository.findById(1L);
+      log.info("Customer found with findById(1L):");
+      log.info("--------------------------------");
+      log.info(customer.toString());
+      log.info("");
+
+      // fetch customers by last name
+      log.info("Customer found with findByLastName('Bauer'):");
+      log.info("--------------------------------------------");
+      repository.findByLastName("Bauer").forEach(bauer -> {
+        log.info(bauer.toString());
+      });
+      // for (Customer bauer : repository.findByLastName("Bauer")) {
+      //  log.info(bauer.toString());
+      // }
+      log.info("");
+    };
+  }
+
+}   
+
+
+
+*************************jpa********************
+
+Java Persistence API is a collection of classes and methods to persistently store the vast amounts of data 
+into a database. This tutorial provides you the basic understanding of Persistence (storing the copy of database object into temporary memory), and we will learn the understanding of JAVA Persistence API (JPA)
+
+
+Java Persistence API is a collection of classes and methods to persistently store the vast amounts of data into a database which is provided by the Oracle Corporation.
+
+Where to use JPA?
+To reduce the burden of writing codes for relational object management, a programmer follows the ‘JPA Provider’ framework, which allows easy interaction with database instance. Here the required framework is taken over by JPA.
+
+example for jpa
+Model or POJO
+
+Employee.java
+
+Persistence
+
+Persistence.xml
+
+Service
+
+CreatingEmployee.java
+
+UpdatingEmployee.java
+
+FindingEmployee.java
+
+DeletingEmployee.java
+
+
+
+*************************************************RESTFULL WEB SERVICES*******************
+
+REST stands for REpresentational State Transfer.
+
+REST is an architectural style not a protocol.
+Advantages of RESTful Web Services
+Fast: RESTful Web Services are fast because there is no strict specification like SOAP. It consumes less bandwidth and resource.
+
+Language and Platform independent: RESTful web services can be written in any programming language and executed in any platform.
+
+Can use SOAP: RESTful web services can use SOAP web services as the implementation.
+
+Permits different data format: RESTful web service permits different data format such as Plain Text, HTML, XML and JSON.
+
+
+DIFFERNECE BETWEEN SOAP AND REST
+No.	SOAP	                                                        REST
+1)	SOAP is a protocol.	                                 REST is an architectural style.
+2)	SOAP stands for Simple Object Access Protocol.	         REST stands for REpresentational State Transfer.
+3)	SOAP can't use REST because it is a protocol.	          REST can use SOAP web services because it is a concept and can use any protocol like HTTP, SOAP.
+4)	SOAP uses services interfaces to expose the business logic.	REST uses URI to expose business logic.
+5)	JAX-WS is the java API for SOAP web services.	            JAX-RS is the java API for RESTful web services.

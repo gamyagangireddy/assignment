@@ -1,0 +1,134 @@
+
+
+*********************************DOCKER****************************
+
+
+Docker is an open platform for developing, shipping, and running applications.
+ Docker enables you to separate your applications from your infrastructure so you can deliver software quickly. 
+With Docker, you can manage your infrastructure in the same ways you manage your applications. 
+By taking advantage of Docker’s methodologies for shipping, testing, and deploying code quickly, you can significantly
+ reduce the delay between writing code and running it in production.
+
+Features of Docker:
+Docker has the ability to reduce the size of development by providing a smaller footprint of the operating system via containers.
+
+With containers, it becomes easier for teams across different units, such as development, QA and Operations to work seamlessly across applications.
+
+You can deploy Docker containers anywhere, on any physical and virtual machines and even on the cloud.
+
+Since Docker containers are pretty lightweight, they are very easily scalable.
+
+
+*******************************************command lines syntax*********************
+In Docker, everything is based on Images:
+                       docker run hello-world 
+                       sudo docker run -it centos /bin/bash
+Displaying Docker Images:
+                       docker images
+
+
+Listing of Containers:
+                       docker ps
+docker history:
+                  docker history ImageID 
+docker top:
+          docker top ContainerID 
+docker stop:
+          docker stop ContainerID
+docker rm:
+          docker rm ContainerID 
+docker stats:
+This command is used to provide the statistics of a running container.
+
+Syntax
+docker stats ContainerID
+
+ 
+docker attach:
+This command is used to attach to a running container.
+
+Syntax
+docker attach ContainerID 
+
+docker pause:
+This command is used to pause the processes in a running container.
+
+Syntax
+docker pause ContainerID 
+Options
+ContainerID − This is the Container ID to which you need to pause the processes in the container.
+
+Return Value
+The ContainerID of the paused container.
+
+docker unpause:
+This command is used to unpause the processes in a running container.
+
+Syntax
+docker unpause ContainerID
+
+docker kill:
+This command is used to kill the processes in a running container.
+
+Syntax
+docker kill ContainerID
+**************************DOCKER NETWORK*************
+
+Listing All Docker Networks
+This command can be used to list all the networks associated with Docker on the host.
+
+Syntax
+docker network ls 
+Options
+None
+
+Inspecting a Docker network:
+If you want to see more details on the network associated with Docker, you can use the Docker network inspect command.
+
+Syntax
+docker network inspect networkname 
+
+
+*********************BASIC COMMANDS***********
+
+imp commands for create imagein docker:
+docker image:                                               it seraches imagein registry 
+docker run repository:value:                                   it will search the image else it will dowmloads the image from registry
+docker run repository:value ls/    :                             it will list the repositories
+-i tag iterative mode
+_t tag for repative creates a psuedo-TTY that signs stdin and stdout
+docker run --rm repository:value sleep time
+docker ps
+docker ps -a
+docker run --name hello_world busybox:1.24
+dockewr insecpt container_id 
+docker run image_name-                                           run the images
+docker run -d image_name-                               run all the images in background
+docker run pd image_name:tag                            we can run the specific version of the image
+docker pull image_name                                  we can pull image from the hub using this command
+docker start _d container_name                           starts the container
+docker stop                                              stops the running container
+docker logs container_name                               see the logs of the particular cintainer
+docker push image_name                                 pushes the image of the container to the docker
+docker swarm init                                      it initialize a swarm. The docker engine targeted by this commaned becomes a manager
+                                                       in the newly created single-node swarm
+docker swarm join                                      join a swarm as a swarm node
+dockewr swarm leave                                     leave the swarm
+
+********TYPES OF DEFAULT NETWORK IN DOCKERS******************
+
+1.NONE NETWORK
+2.BRIDGE NETWORK
+3. OVERLAY NETWORK
+1.NONE NETWORK
+ For this container, disable all networking. Usually used in conjunction with a custom network driver. 
+none is not available for swarm services. See disable container networking.
+
+2.BRIDGE NETWORK
+    The default network driver. If you don’t specify a driver, this is the type of network you are creating.
+ Bridge networks are usually used when your applications run in standalone containers that need to communicate.
+ See bridge networks.
+3.OVERLAY NETWORK
+  Overlay networks connect multiple Docker daemons together and enable swarm services to communicate with each other. 
+You can also use overlay networks to facilitate communication between a swarm service and a standalone container, or between two standalone containers on different Docker daemons.
+ This strategy removes the need to do OS-level routing between these containers. See overlay networks.
